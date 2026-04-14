@@ -1,36 +1,61 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# SmartAgriAI
+
+SmartAgriAI is a smart agriculture management system built with Next.js and Tailwind CSS. It provides a modern dashboard for monitoring farm sensors, irrigation status, crop health, and daily farming tasks.
+
+## Features
+
+- Farm overview with key performance metrics
+- IoT sensor monitoring for soil moisture, temperature, humidity, and light
+- Irrigation status and scheduling
+- Crop planning and task management
+- Responsive dashboard layout with Tailwind CSS
 
 ## Getting Started
 
-First, run the development server:
+Install dependencies:
+
+```bash
+npm install
+```
+
+Run the development server:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) to view the dashboard.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Build
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm run build
+```
 
-## Learn More
+## Project Structure
 
-To learn more about Next.js, take a look at the following resources:
+- `app/layout.tsx` — global layout, metadata, and font setup
+- `app/page.tsx` — landing and dashboard home screen
+- `app/globals.css` — global Tailwind styling and theme
+- `app/api/auth` — auth endpoints for login, registration, and profile
+- `app/api/users` — admin-only user list endpoint
+- `app/api/public` — demo public endpoints with farm overview and telemetry
+- `scripts/seed-demo.js` — seed script for demo accounts
+- `.env.local.example` — environment variable template
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Demo credentials
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Use `npm run seed-demo` after configuring `.env.local` to create demo accounts and output credentials/tokens.
 
-## Deploy on Vercel
+- Admin: `admin@smartagri.local` / `Admin123!`
+- Farmer: `farmer@smartagri.local` / `Farmer123!`
+- UserFarmer: `userfarmer@smartagri.local` / `UserFarmer123!`
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Public APIs
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- `GET /api/public/overview` — farm overview and alerts
+- `GET /api/public/telemetry` — sample sensor telemetry data
+
+## Notes
+
+If you encounter build issues after switching branches or upgrading dependencies, remove `node_modules` and `package-lock.json`, then reinstall with `npm install`.
