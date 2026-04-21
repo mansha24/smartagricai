@@ -1,0 +1,59 @@
+Build a full-stack Smart Agriculture Management System using MERN stack only.
+
+Mandatory requirements:
+- MongoDB, Express.js, React.js, Node.js
+- Complete CRUD operations
+- JWT authentication
+- Role-based authentication
+- MVC architecture
+- Responsive UI
+- Deployment ready
+
+Project roles:
+1. Admin
+2. Farmer
+3. Agricultural Expert
+4. Supplier
+
+Authentication:
+- JWT based login/signup
+- bcrypt password hashing
+- protected routes
+- role-based access middleware
+
+Architecture:
+Follow MVC architecture in backend:
+- models
+- controllers
+- routes
+- middleware
+- config
+
+Frontend:
+Use React + Tailwind CSS + Axios + React Router DOM
+
+Main modules:
+1. User Management
+2. Crop Management
+3. Soil & Fertility Management
+4. Irrigation Management
+5. Weather Monitoring
+6. Equipment Management
+7. Fertilizer & Pesticide Tracking
+8. Yield Analytics
+9. Smart Recommendations
+10. Supplier Marketplace
+
+Smart features (include any 4):
+- crop recommendation system
+- irrigation reminders
+- fertilizer recommendation
+- disease alerts
+
+Dashboard:
+Role-specific dashboards with charts and analytics
+
+Deployment:
+Frontend on Vercel
+Backend on Render
+Database on MongoDB Atlas

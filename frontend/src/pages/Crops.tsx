@@ -1,0 +1,72 @@
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
+
+const Crops: React.FC = () => {
+  const [crops, setCrops] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetchCrops();
+  }, []);
+
+  const fetchCrops = async () => {
+    try {
+      const user = JSON.parse(localStorage.getItem('user') || 'null');
+      const config = {
+        headers: {
+          Authorization: `Bearer ${user?.token}`,
+        },
+      };
+      const response = await axios.get('http://localhost:5000/api/crops', config);
+      setCrops(response.data);
+    } catch (error) {
+      console.error('Error fetching crops:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  if (loading) {
+    return <div>Loading crops...</div>;
+  }
+
+  return (
+    <div>
+      <h1 className="text-3xl font-bold text-gray-800 mb-8">Crop Management</h1>
+      
+      <div className="bg-white rounded-lg shadow-md p-6">
+        <div className="flex justify-between items-center mb-6">
+          <h2 className="text-xl font-semibold">Your Crops</h2>
+          <button className="bg-green-600 text-white px-4 py-2 rounded-md hover:bg-green-700">
+            Add New Crop
+          </button>
+        </div>
+
+        {crops.length === 0 ? (
+          <p className="text-gray-600">No crops found. Add your first crop to get started.</p>
+        ) : (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {crops.map((crop: any) => (
+              <div key={crop._id} className="border border-gray-200 rounded-lg p-4">
+                <h3 className="text-lg font-semibold text-gray-800 mb-2">{crop.name}</h3>
+                <p className="text-gray-600 mb-1">Type: {crop.type}</p>
+                <p className="text-gray-600 mb-1">Status: {crop.status}</p>
+                <p className="text-gray-600 mb-1">Planted: {new Date(crop.plantingDate).toLocaleDateString()}</p>
+                <div className="mt-4 flex space-x-2">
+                  <button className="bg-blue-500 text-white px-3 py-1 rounded text-sm hover:bg-blue-600">
+                    View Details
+                  </button>
+                  <button className="bg-yellow-500 text-white px-3 py-1 rounded text-sm hover:bg-yellow-600">
+                    Edit
+                  </button>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+    </div>
+  );
+};
+
+export default Crops;
