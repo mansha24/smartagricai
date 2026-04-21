@@ -43,27 +43,50 @@ smartagricai/
 - MongoDB
 - npm or yarn
 
-### Backend Setup
+### Local Development Setup
+
+#### Backend Setup
 ```bash
 cd backend
 npm install
 npm run dev
 ```
+The backend will run on `http://localhost:5000`
 
-### Frontend Setup
+#### Frontend Setup
+In a separate terminal:
 ```bash
 cd frontend
 npm install
 npm start
 ```
+The frontend development server will run on `http://localhost:3000`
 
 ### Environment Variables
-Create `.env` file in backend directory:
+
+#### Backend (.env in `/backend/`)
 ```
 MONGO_URI=mongodb://localhost:27017/smartagricai
-JWT_SECRET=your_jwt_secret_key_here
+JWT_SECRET=your_jwt_secret_key_here_min_32_chars
 PORT=5000
 ```
+
+#### Frontend (.env in `/frontend/`)
+```
+REACT_APP_API_URL=http://localhost:5000
+```
+
+### Deployment
+
+#### Deploy Backend (Node.js + Express)
+- Deploy the `/backend` folder to Heroku, Railway, Render, or any Node.js hosting
+- Set environment variables (MONGO_URI, JWT_SECRET)
+- Backend will serve on the provided URL
+
+#### Deploy Frontend (React App)
+- Frontend is configured to deploy to Vercel via `vercel.json`
+- `vercel.json` automatically builds the React frontend
+- Update `REACT_APP_API_URL` in frontend to your deployed backend URL
 
 ## API Endpoints
 
