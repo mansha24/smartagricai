@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import NavBar from "@/components/NavBar";
+import { getClientApiBaseUrl } from "@/lib/client-api";
 
 export default function CropsPage() {
   const [crops, setCrops] = useState([]);
@@ -20,7 +21,7 @@ export default function CropsPage() {
           Authorization: `Bearer ${user?.token}`,
         },
       };
-      const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000';
+      const apiUrl = getClientApiBaseUrl();
       const response = await axios.get(`${apiUrl}/crops`, config);
       setCrops(response.data);
     } catch (error) {

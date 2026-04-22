@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import NavBar from "@/components/NavBar";
+import { getClientApiBaseUrl } from "@/lib/client-api";
 
 export default function IrrigationPage() {
   const [irrigationData, setIrrigationData] = useState([]);
@@ -20,7 +21,7 @@ export default function IrrigationPage() {
           Authorization: `Bearer ${user?.token}`,
         },
       };
-      const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000';
+      const apiUrl = getClientApiBaseUrl();
       const response = await axios.get(`${apiUrl}/irrigation`, config);
       setIrrigationData(response.data);
     } catch (error) {

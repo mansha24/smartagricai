@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import NavBar from "@/components/NavBar";
+import { getClientApiBaseUrl } from "@/lib/client-api";
 
 export default function SuppliersPage() {
   const [suppliers, setSuppliers] = useState([]);
@@ -20,7 +21,7 @@ export default function SuppliersPage() {
           Authorization: `Bearer ${user?.token}`,
         },
       };
-      const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000';
+      const apiUrl = getClientApiBaseUrl();
       const response = await axios.get(`${apiUrl}/suppliers`, config);
       setSuppliers(response.data);
     } catch (error) {

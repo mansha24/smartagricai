@@ -83,10 +83,15 @@ REACT_APP_API_URL=http://localhost:5000
 - Set environment variables (MONGO_URI, JWT_SECRET)
 - Backend will serve on the provided URL
 
-#### Deploy Frontend (React App)
-- Frontend is configured to deploy to Vercel via `vercel.json`
-- `vercel.json` automatically builds the React frontend
-- Update `REACT_APP_API_URL` in frontend to your deployed backend URL
+#### Deploy Next.js App on Vercel
+- Import the repository in Vercel and keep the root directory as `/`.
+- Build command: `npm run build` (default for Next.js).
+- Set these environment variables in Vercel project settings:
+  - `MONGODB_URI`
+  - `JWT_SECRET` (required in all environments, no default fallback)
+  - `JWT_EXPIRES_IN` (optional, defaults to `4h`)
+  - `NEXT_PUBLIC_API_URL` (required in production, for example: `https://your-project.vercel.app/api`)
+- Redeploy after setting environment variables.
 
 ## API Endpoints
 

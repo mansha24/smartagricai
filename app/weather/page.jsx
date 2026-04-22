@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import NavBar from "@/components/NavBar";
+import { getClientApiBaseUrl } from "@/lib/client-api";
 
 export default function WeatherPage() {
   const [weatherData, setWeatherData] = useState([]);
@@ -20,7 +21,7 @@ export default function WeatherPage() {
           Authorization: `Bearer ${user?.token}`,
         },
       };
-      const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000';
+      const apiUrl = getClientApiBaseUrl();
       const response = await axios.get(`${apiUrl}/weather`, config);
       setWeatherData(response.data);
     } catch (error) {
