@@ -1,0 +1,28 @@
+# Additional configuration for backend deployment
+# Place this file at the root level and rename to vercel.json if deploying backend to Vercel
+
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "backend/server.js",
+      "use": "@vercel/node",
+      "config": {
+        "maxDuration": 60,
+        "memory": 1024
+      }
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "backend/server.js"
+    }
+  ],
+  "env": {
+    "MONGODB_URI": "@mongodb_uri",
+    "JWT_SECRET": "@jwt_secret",
+    "PORT": "3001",
+    "NODE_ENV": "production"
+  }
+}

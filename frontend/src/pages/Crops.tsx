@@ -17,7 +17,8 @@ const Crops: React.FC = () => {
           Authorization: `Bearer ${user?.token}`,
         },
       };
-      const response = await axios.get('http://localhost:5000/api/crops', config);
+      const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:5000';
+      const response = await axios.get(`${apiUrl}/crops`, config);
       setCrops(response.data);
     } catch (error) {
       console.error('Error fetching crops:', error);
