@@ -43,7 +43,8 @@ export default function RegisterPage() {
         return;
       }
 
-      localStorage.setItem("user", JSON.stringify(data.user));
+      const sessionUser = { ...data.user, token: data.token };
+      localStorage.setItem("user", JSON.stringify(sessionUser));
       localStorage.setItem("token", data.token);
       router.push("/dashboard");
     } catch (error) {

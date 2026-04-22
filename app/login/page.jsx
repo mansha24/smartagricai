@@ -26,11 +26,13 @@ export default function LoginPage() {
 
       const data = await response.json();
       if (!response.ok) {
-        setError(data.message || "Unable to sign in.");
+        setError(data.error || data.message || "Unable to sign in.");
         return;
       }
 
-      localStorage.setItem("user", JSON.stringify(data));
+      const sessionUser = { ...data.user, token: data.token };
+      localStorage.setItem("user", JSON.stringify(sessionUser));
+      localStorage.setItem("token", data.token);
       router.push("/dashboard");
     } catch (error) {
       setError("Unable to sign in.");
