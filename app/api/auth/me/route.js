@@ -1,15 +1,17 @@
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 import { ObjectId } from "mongodb";
 import { connectMongo } from "@/lib/mongodb";
-import { getBearerToken, verifyJwt } from "@/lib/auth";
+import { verifyJwt } from "@/lib/auth";
 
-export async function GET(req: NextRequest) {
-  const token = getBearerToken(req.headers);
-  if (!token) {
-    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-  }
-
+export async function GET(req) {
   try {
+    const authHeader = req.headers.get('authorization');
+    const token = authHeader?.replace('Bearer ', '');
+    
+    if (!token) {
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    }
+
     const payload = verifyJwt(token);
     const client = await connectMongo();
     const users = client.db().collection("users");

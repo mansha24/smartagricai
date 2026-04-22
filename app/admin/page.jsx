@@ -4,8 +4,8 @@ import { useEffect, useState } from "react";
 import NavBar from "@/components/NavBar";
 
 export default function AdminPage() {
-  const [user, setUser] = useState<{ name: string; role: string } | null>(null);
-  const [users, setUsers] = useState<Array<{ id: string; name: string; email: string; role: string; createdAt: string }>>([]);
+  const [user, setUser] = useState(null);
+  const [users, setUsers] = useState([]);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(true);
 

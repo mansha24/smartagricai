@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { connectMongo } from "@/lib/mongodb";
 import { getBearerToken, verifyJwt } from "@/lib/auth";
 
-export async function GET(req: NextRequest) {
+export async function GET(req) {
   const token = getBearerToken(req.headers);
   if (!token) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });

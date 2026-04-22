@@ -10,28 +10,32 @@ export default function LoginPage() {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     setError("");
     setLoading(true);
 
-    const response = await fetch("/api/auth/login", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email, password }),
-    });
+    try {
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000';
+      const response = await fetch(`${apiUrl}/auth/login`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password }),
+      });
 
-    const data = await response.json();
-    setLoading(false);
+      const data = await response.json();
+      if (!response.ok) {
+        setError(data.message || "Unable to sign in.");
+        return;
+      }
 
-    if (!response.ok) {
-      setError(data.error || "Unable to sign in.");
-      return;
+      localStorage.setItem("user", JSON.stringify(data));
+      router.push("/dashboard");
+    } catch (error) {
+      setError("Unable to sign in.");
+    } finally {
+      setLoading(false);
     }
-
-    localStorage.setItem("smartagri_token", data.token);
-    localStorage.setItem("smartagri_user", JSON.stringify(data.user));
-    router.push("/dashboard");
   };
 
   return (
