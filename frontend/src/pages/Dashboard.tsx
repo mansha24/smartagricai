@@ -25,7 +25,8 @@ const Dashboard: React.FC = () => {
         };
 
         // Fetch crops count
-        const cropsRes = await axios.get('http://localhost:5000/api/crops', config);
+        const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:5000';
+        const cropsRes = await axios.get(`${apiUrl}/crops`, config);
         setStats(prev => ({ ...prev, crops: cropsRes.data.length }));
 
         // You can add more stats fetching here
